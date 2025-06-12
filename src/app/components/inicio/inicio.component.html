@@ -1,1 +1,11 @@
 <p>inicio works!</p>
+<section class="sabores-container">
+  <h2>Sabores disponibles</h2>
+  <div class="sabores-lista">
+    <div class="sabor-card" *ngFor="let sabor of sabores">
+      <img [src]="sabor.image || sabor.Image" [alt]="sabor.nombre" class="sabor-img" />
+      <h3>{{ sabor.nombre }}</h3>
+      <p>{{ sabor.descripcion }}</p>
+    </div>
+  </div>
+</section>

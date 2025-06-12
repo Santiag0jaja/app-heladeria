@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   selector: 'app-header',
   template: `
     <header class="header">
-      <div class="logo" (click)="goHome()">🍦 Heladería Delicia</div>
+      <div class="logo" (click)="goHome()">🍦 Heladería Mierda</div>
       <nav>
         <button *ngIf="isLoggedIn" (click)="logout()">Cerrar sesión</button>
       </nav>
