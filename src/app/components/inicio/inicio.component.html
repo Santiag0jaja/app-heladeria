@@ -1,11 +1,18 @@
-<p>inicio works!</p>
-<section class="sabores-container">
-  <h2>Sabores disponibles</h2>
-  <div class="sabores-lista">
-    <div class="sabor-card" *ngFor="let sabor of sabores">
-      <img [src]="sabor.image || sabor.Image" [alt]="sabor.nombre" class="sabor-img" />
-      <h3>{{ sabor.nombre }}</h3>
-      <p>{{ sabor.descripcion }}</p>
+<!-- inicio.component.html -->
+<section class="hero">
+  <div class="hero-content">
+    <h2>Los mejores helados artesanales</h2>
+    <p>Disfruta de nuestros sabores únicos hechos con ingredientes naturales</p>
+    <button class="cta-button" routerLink="/hacer-pedido">Ordenar Ahora</button>
+  </div>
+</section>
+
+<section class="featured-flavors">
+  <h3>Nuestros Sabores Destacados</h3>
+  <div class="flavors-grid">
+    <div class="flavor-card" *ngFor="let sabor of saboresDestacados">
+      <img [src]="sabor.imagen" [alt]="sabor.nombre">
+      <h4>{{ sabor.nombre }}</h4>
     </div>
   </div>
 </section>
