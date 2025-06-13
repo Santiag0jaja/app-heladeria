@@ -1,1 +1,17 @@
-<p>header works!</p>
+<!-- header.component.html -->
+<header class="header">
+  <div class="logo">
+    <h1>Heladería Delicia</h1>
+  </div>
+  <nav class="nav">
+    <a [class.active]="isActive('/inicio')" routerLink="/inicio">Inicio</a>
+    <a [class.active]="isActive('/hacer-pedido')" routerLink="/hacer-pedido">Hacer Pedido</a>
+    <a [class.active]="isActive('/listar-pedidos')" routerLink="/listar-pedidos">Mis Pedidos</a>
+    <a [class.active]="isActive('/gestion-sabores')" routerLink="/gestion-sabores" *ngIf="isAdmin">Gestionar Sabores</a>
+    <a [class.active]="isActive('/clientes')" routerLink="/clientes" *ngIf="isAdmin">Clientes</a>
+  </nav>
+  <div class="user-section">
+    <button class="logout-btn" (click)="logout()">Cerrar Sesión</button>
+  </div>
+</header>
+
