@@ -1,1 +1,70 @@
-<p>hacer-pedido works!</p>
+<!-- hacer-pedido.component.html -->
+<div class="pedido-container">
+  <h2>Hacer un Pedido</h2>
+  
+  <form [formGroup]="pedidoForm" (ngSubmit)="onSubmit()" class="pedido-form">
+    <div class="form-group">
+      <label for="sabor">Sabor de Helado:</label>
+      <select id="sabor" formControlName="sabor" class="form-control">
+        <option value="">Selecciona un sabor</option>
+        <option *ngFor="let sabor of sabores" [value]="sabor.id">
+          {{ sabor.nombre }} - ${{ sabor.precio }}
+        </option>
+      </select>
+      <div *ngIf="pedidoForm.get('sabor')?.invalid && pedidoForm.get('sabor')?.touched" class="error-message">
+        Por favor selecciona un sabor
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Toppings:</label>
+      <div *ngFor="let topping of toppings" class="topping-option">
+        <input 
+          type="checkbox" 
+          [id]="'topping-' + topping.id" 
+          [value]="topping.id" 
+          (change)="onToppingChange($event, topping.id)"
+        >
+        <label [for]="'topping-' + topping.id">
+          {{ topping.nombre }} - ${{ topping.precio }}
+        </label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="cantidad">Cantidad:</label>
+      <input 
+        type="number" 
+        id="cantidad" 
+        formControlName="cantidad" 
+        min="1" 
+        class="form-control"
+      >
+      <div *ngIf="pedidoForm.get('cantidad')?.invalid && pedidoForm.get('cantidad')?.touched" class="error-message">
+        La cantidad debe ser al menos 1
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="notas">Notas adicionales:</label>
+      <textarea 
+        id="notas" 
+        formControlName="notas" 
+        class="form-control"
+        rows="3"
+      ></textarea>
+    </div>
+
+    <div class="total-section">
+      <h3>Total: ${{ calcularTotal() | number:'1.2-2' }}</h3>
+    </div>
+
+    <button 
+      type="submit" 
+      class="submit-btn"
+      [disabled]="pedidoForm.invalid"
+    >
+      Confirmar Pedido
+    </button>
+  </form>
+</div>
