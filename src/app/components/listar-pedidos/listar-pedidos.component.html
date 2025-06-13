@@ -1,1 +1,31 @@
-<p>listar-pedidos works!</p>
+<!-- listar-pedidos.component.html -->
+<div class="pedidos-container">
+  <h2>Mis Pedidos</h2>
+  
+  <div *ngIf="pedidos.length === 0" class="no-pedidos">
+    <p>No tienes pedidos realizados.</p>
+    <button routerLink="/hacer-pedido" class="hacer-pedido-btn">Hacer un Pedido</button>
+  </div>
+
+  <div *ngIf="pedidos.length > 0" class="pedidos-list">
+    <div *ngFor="let pedido of pedidos" class="pedido-card">
+      <div class="pedido-header">
+        <h3>Pedido #{{ pedido.id }}</h3>
+        <span class="fecha">{{ pedido.fecha | date:'mediumDate' }}</span>
+      </div>
+      
+      <div class="pedido-details">
+        <p><strong>Sabor:</strong> {{ pedido.sabor }}</p>
+        <p><strong>Toppings:</strong> {{ pedido.toppings.join(', ') || 'Ninguno' }}</p>
+        <p><strong>Cantidad:</strong> {{ pedido.cantidad }}</p>
+        <p><strong>Total:</strong> ${{ pedido.total.toFixed(2) }}</p>
+      </div>
+      
+      <div class="pedido-footer">
+        <span class="estado" [class]="getEstadoClass(pedido.estado)">
+          {{ pedido.estado | titlecase }}
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
