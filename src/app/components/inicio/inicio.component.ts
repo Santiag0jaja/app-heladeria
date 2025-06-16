@@ -1,12 +1,13 @@
-// inicio.component.ts
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router'; // ⬅️ Agrega esto
 
 @Component({
   selector: 'app-inicio',
+  standalone: true,
   templateUrl: './inicio.component.html',
   styleUrls: ['./inicio.component.css'],
-  imports: [CommonModule]
+  imports: [CommonModule, RouterModule] // ⬅️ Asegúrate de incluir RouterModule
 })
 export class InicioComponent {
   saboresDestacados = [

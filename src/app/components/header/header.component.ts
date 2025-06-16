@@ -1,22 +1,31 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
+
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private authService: AuthService
+  ) {}
 
-public isAdmin: boolean = false;
+  public isAdmin: boolean = false;
+
   isActive(route: string): boolean {
     return this.router.url === route;
   }
 
   logout(): void {
-    console.log('Logout clicked');
+    this.authService.logout();
   }
 }
+// Este componente de encabezado incluye enlaces de navegación y un botón de cierre de sesión.
+// Utiliza el servicio de autenticación para manejar el cierre de sesión y verificar si el usuario es administrador.
