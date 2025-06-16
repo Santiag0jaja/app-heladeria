@@ -13,6 +13,7 @@ La aplicación demuestra la integración de las funcionalidades clave de Angular
 
 ---
 
+
 ## Tecnologías y Conceptos Aplicados
 
 - **Angular 16**  
