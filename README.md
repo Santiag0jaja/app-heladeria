@@ -1,59 +1,104 @@
-# AppHeladeria
+# Aplicación SPA CRUD en Angular 16
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.11.
+## Descripción del Proyecto
 
-## Development server
+Este proyecto corresponde a la tarea final de Desarrollo Frontend, en la cual se desarrolló una **Single Page Application (SPA)** utilizando **Angular 16**. La aplicación implementa un sistema completo CRUD (Crear, Leer, Actualizar y Eliminar) que permite la gestión de datos a través de una interfaz amigable y funcional.
 
-To start a local development server, run:
+La aplicación demuestra la integración de las funcionalidades clave de Angular, como directivas estructurales, protección de rutas, comunicación con APIs y formularios reactivos, todo en un entorno SPA con routing configurado para una navegación fluida.
 
-```bash
-ng serve
-```
+---
+<div align="center">
+  <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExMjVqYnA1ZWZ1bXJiNDR6d2kzaW9ienpuMzE2MHB0dGVycHl4NjM1OSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/pUVOeIagS1rrqsYQJe/giphy.gif" width="600" style="border-radius: 12px; border: 1px solid #e0f7e0;"/>
+</div>
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+---
 
-## Code scaffolding
+## Tecnologías y Conceptos Aplicados
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+- **Angular 16**  
+- **TypeScript**  
+- **HTML5 & CSS3**  
+- **Servicios HttpClient** para la comunicación con API REST  
+- **Formularios Reactivos** para gestión avanzada de formularios y validaciones  
+- **Routing y Guards** para protección y control de acceso a rutas  
+- **Directivas Estructurales** como `*ngIf` y `*ngFor` para renderizado condicional y listado dinámico  
+- **JSON Server** (o cualquier API simulada) para pruebas de backend local  
 
-```bash
-ng generate component component-name
-```
+---
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Funcionalidades Principales
 
-```bash
-ng generate --help
-```
+- **CRUD Completo**  
+  - **Crear:** Añadir nuevas entidades mediante formularios reactivos.  
+  - **Leer:** Listar datos consumidos desde la API con vistas detalladas.  
+  - **Actualizar:** Modificar datos existentes y actualizar en el backend vía PUT.  
+  - **Eliminar:** Borrar registros desde la interfaz con confirmación.  
 
-## Building
+- **Gestión de pedidos, clientes y sabores:**  
+  Implementación práctica de un sistema de pedidos de helados, gestionando los datos de clientes, sabores y pedidos.
 
-To build the project run:
+- **Protección de rutas con Guards:**  
+  Uso de `CanActivate` para asegurar que sólo usuarios autorizados puedan acceder a ciertas vistas.
 
-```bash
-ng build
-```
+- **Validaciones y UX:**  
+  Formularios con validación en tiempo real y mensajes de error, para asegurar una experiencia de usuario robusta y limpia.
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+---
 
-## Running unit tests
+## Estructura del Proyecto
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+- `/src/app/components/`  
+  Componentes reutilizables y específicos para gestión de pedidos, clientes, sabores y listado/modificación.
 
-```bash
-ng test
-```
+- `/src/app/services/`  
+  Servicios que encapsulan la lógica de comunicación con la API (HttpClient).
 
-## Running end-to-end tests
+- `/src/app/guards/`  
+  Guards para protección de rutas.
 
-For end-to-end (e2e) testing, run:
+- `/src/app/app-routing.module.ts`  
+  Definición de rutas y asignación de guards.
 
-```bash
-ng e2e
-```
+---
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## Configuración y Ejecución
 
-## Additional Resources
+1. **Clonar el repositorio:**  
+   ```bash
+   git clone <url-del-repositorio>
+   cd app-heladeria
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+2. **Instalar dependencias:**
+
+   ```bash
+    npm install
+
+3. **Levantar API simulada (JSON Server):
+    (Asegúrate de tener instalado JSON Server)**
+
+   ```bash
+    json-server --watch db.json --port 3000
+
+4. **Ejecutar la aplicación Angular:**
+
+   ```bash
+    ng serve
+    Navegar a http://localhost:4200 para interactuar con la SPA.
+
+---
+**Notas Importantes**
+La API simulada está configurada en http://localhost:3000 y los servicios Angular consumen esta dirección para realizar las operaciones CRUD.
+
+Se ha implementado manejo básico de errores y confirmaciones para acciones destructivas como eliminar pedidos o clientes.
+
+El proyecto está estructurado para facilitar la escalabilidad y el mantenimiento.
+
+Créditos
+---
+Proyecto desarrollado por Santiago Díaz Echavarría como tarea final para la asignatura de Desarrollo Frontend.
+
+
+
+
+
+
