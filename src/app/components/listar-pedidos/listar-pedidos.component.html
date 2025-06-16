@@ -1,15 +1,41 @@
-<div class="pedidos-container">
+<div class="listar-container">
   <h2>Lista de Pedidos</h2>
 
   <div *ngIf="pedidos.length === 0">No hay pedidos disponibles.</div>
 
   <div *ngFor="let pedido of pedidos" class="pedido-card">
-    <p><strong>Cliente:</strong> {{ pedido.cliente }}</p>
-    <p><strong>Toppings:</strong> {{ pedido.toppings.join(', ') }}</p>
-    <p><strong>Total:</strong> ${{ pedido.total | number:'1.0-0' }}</p>
-    <button (click)="eliminarPedido(pedido.id)">Eliminar</button>
+    <ng-container *ngIf="editandoId === pedido.id; else vista">
+      <label>Cliente:</label>
+      <input [(ngModel)]="pedido.cliente" />
+
+      <label>Sabor:</label>
+      <input [(ngModel)]="pedido.sabor.nombre" />
+
+      <label>Cantidad:</label>
+      <input type="number" [(ngModel)]="pedido.cantidad" />
+
+      <label>Notas:</label>
+      <textarea [(ngModel)]="pedido.notas"></textarea>
+
+      <button (click)="guardarEdicion(pedido)">💾 Guardar</button>
+      <button (click)="cancelarEdicion()">Cancelar</button>
+    </ng-container>
+
+    <ng-template #vista>
+      <p><strong>Cliente:</strong> {{ pedido.cliente }}</p>
+      <p><strong>Sabor:</strong> {{ pedido.sabor?.nombre }} ({{ pedido.sabor?.precio | currency:'COP':'symbol' }})</p>
+      <p><strong>Cantidad:</strong> {{ pedido.cantidad }}</p>
+      <p><strong>Toppings:</strong> {{ pedido.toppings.join(', ') }}</p>
+      <p><strong>Notas:</strong> {{ pedido.notas || 'Ninguna' }}</p>
+      <p><strong>Total:</strong> ${{ pedido.total | number:'1.0-0' }}</p>
+      <p><strong>Fecha:</strong> {{ pedido.fecha }} - <strong>Hora:</strong> {{ pedido.hora }}</p>
+
+      <button (click)="habilitarEdicion(pedido.id)">✏️ Editar</button>
+      <button (click)="eliminarPedido(pedido.id)">🗑️ Eliminar</button>
+    </ng-template>
   </div>
 </div>
+
 <!-- Este componente permite a los usuarios ver una lista de pedidos realizados.
      Cada pedido muestra el nombre del cliente, los toppings seleccionados y el total del pedido.
      También incluye un botón para eliminar cada pedido de la lista. -->

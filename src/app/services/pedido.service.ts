@@ -20,4 +20,9 @@ export class PedidoService {
   eliminarPedido(id: number): Observable<any> {
     return this.http.delete<any>(`${this.apiUrl}/${id}`);
   }
+
+  actualizarPedido(id: number, pedido: any): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/${id}`, pedido);
+  }
 }
+
