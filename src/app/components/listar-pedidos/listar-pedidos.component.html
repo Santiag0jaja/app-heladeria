@@ -1,31 +1,21 @@
-<!-- listar-pedidos.component.html -->
 <div class="pedidos-container">
   <h2>Mis Pedidos</h2>
-  
-  <div *ngIf="pedidos.length === 0" class="no-pedidos">
-    <p>No tienes pedidos realizados.</p>
-    <button routerLink="/hacer-pedido" class="hacer-pedido-btn">Hacer un Pedido</button>
-  </div>
+  <div *ngIf="pedidos.length === 0">No tienes pedidos registrados.</div>
 
-  <div *ngIf="pedidos.length > 0" class="pedidos-list">
-    <div *ngFor="let pedido of pedidos" class="pedido-card">
-      <div class="pedido-header">
-        <h3>Pedido #{{ pedido.id }}</h3>
-        <span class="fecha">{{ pedido.fecha | date:'mediumDate' }}</span>
-      </div>
-      
-      <div class="pedido-details">
-        <p><strong>Sabor:</strong> {{ pedido.sabor }}</p>
-        <p><strong>Toppings:</strong> {{ pedido.toppings.join(', ') || 'Ninguno' }}</p>
-        <p><strong>Cantidad:</strong> {{ pedido.cantidad }}</p>
-        <p><strong>Total:</strong> ${{ pedido.total.toFixed(2) }}</p>
-      </div>
-      
-      <div class="pedido-footer">
-        <span class="estado" [class]="getEstadoClass(pedido.estado)">
-          {{ pedido.estado | titlecase }}
-        </span>
-      </div>
-    </div>
+  <div *ngFor="let pedido of pedidos" class="pedido-card">
+    <p><strong>Sabor:</strong> {{ pedido.sabor?.nombre }}</p>
+    <p><strong>Toppings:</strong> 
+      <span *ngIf="pedido.toppings?.length > 0; else noToppings">
+        {{ pedido.toppings.join(', ') }}
+      </span>
+      <ng-template #noToppings>Sin toppings</ng-template>
+    </p>
+    <p><strong>Cantidad:</strong> {{ pedido.cantidad }}</p>
+    <p><strong>Notas:</strong> {{ pedido.notas || 'Ninguna' }}</p>
+    <p><strong>Total:</strong> ${{ pedido.total | number:'1.0-0' }}</p>
+    <p><strong>Fecha:</strong> {{ pedido.fecha | date:'short' }}</p>
   </div>
+</div>
+<div class="no-pedidos" *ngIf="pedidos.length === 0">
+  <p>No tienes pedidos registrados.</p>
 </div>

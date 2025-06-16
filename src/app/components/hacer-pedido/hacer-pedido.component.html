@@ -1,4 +1,3 @@
-<!-- hacer-pedido.component.html -->
 <div class="pedido-container">
   <h2>Hacer un Pedido</h2>
   
@@ -6,9 +5,9 @@
     <div class="form-group">
       <label for="sabor">Sabor de Helado:</label>
       <select id="sabor" formControlName="sabor" class="form-control">
-        <option value="">Selecciona un sabor</option>
-        <option *ngFor="let sabor of sabores" [value]="sabor.id">
-          {{ sabor.nombre }} - ${{ sabor.precio }}
+        <option [ngValue]="null">Selecciona un sabor</option>
+        <option *ngFor="let sabor of sabores" [ngValue]="sabor">
+          {{ sabor.nombre }} - {{ sabor.precio | currency:'COP' }}
         </option>
       </select>
       <div *ngIf="pedidoForm.get('sabor')?.invalid && pedidoForm.get('sabor')?.touched" class="error-message">
@@ -26,7 +25,7 @@
           (change)="onToppingChange($event, topping.id)"
         >
         <label [for]="'topping-' + topping.id">
-          {{ topping.nombre }} - ${{ topping.precio }}
+          {{ topping.nombre }} - {{ topping.precio | currency:'COP' }}
         </label>
       </div>
     </div>
@@ -56,7 +55,7 @@
     </div>
 
     <div class="total-section">
-      <h3>Total: ${{ calcularTotal() | number:'1.2-2' }}</h3>
+      <h3>Total: {{ calcularTotal() | currency:'COP' }}</h3>
     </div>
 
     <button 

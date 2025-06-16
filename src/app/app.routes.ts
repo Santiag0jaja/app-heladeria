@@ -24,7 +24,8 @@ export const routes: Routes = [
 },
 {
   path: 'listar-pedidos',
-  loadComponent: () => import('./components/listar-pedidos/listar-pedidos.component').then(m => m.ListarPedidosComponent),
+  loadComponent: () =>
+    import('./components/listar-pedidos/listar-pedidos.component').then(m => m.ListarPedidosComponent),
   canActivate: [authGuard]
 },
 {
