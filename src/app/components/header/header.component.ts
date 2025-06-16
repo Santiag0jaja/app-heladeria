@@ -15,7 +15,6 @@ export class HeaderComponent {
   public isAdmin: boolean = false;
 
   constructor(private router: Router, private authService: AuthService) {
-    // Aquí puedes validar si es admin según tu lógica
     this.isAdmin = this.authService.isLoggedIn(); 
   }
 

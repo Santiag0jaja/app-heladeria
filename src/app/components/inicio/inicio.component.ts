@@ -11,10 +11,10 @@ import { RouterModule } from '@angular/router';
 })
 export class InicioComponent {
   saboresDestacados = [
-    { nombre: 'Chocolate', imagen: 'assets/chocolate.jpg' },
-    { nombre: 'Vainilla', imagen: 'assets/vainilla.jpg' },
-    { nombre: 'Fresa', imagen: 'assets/fresa.jpg' },
-    { nombre: 'Menta', imagen: 'assets/menta.jpg' }
+    { nombre: 'Chocolate', imagen: 'https://images.cookforyourlife.org/wp-content/uploads/2020/06/Chocolate-Whipped-Ice-Cream-shutterstock_1010248351.jpg' },
+    { nombre: 'Vainilla', imagen: 'https://tse1.mm.bing.net/th/id/OIP.rFc1KpEQyuB5eLQQtkycRwHaE7?rs=1&pid=ImgDetMain' },
+    { nombre: 'Fresa', imagen: 'https://assets.unileversolutions.com/recipes-v2/231124.jpg' },
+    { nombre: 'Menta', imagen: 'https://mandolina.co/wp-content/uploads/2023/11/helado-de-menta-1080X550.jpg' }
   ];
 }
 // Este componente muestra la página de inicio de la aplicación, destacando algunos sabores de helado.
