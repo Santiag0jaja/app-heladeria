@@ -25,7 +25,8 @@ export class GestionSaboresComponent implements OnInit {
 
   cargarSabores(): void {
     this.saboresService.getSabores().subscribe((data) => {
-      this.sabores = data;
+      // Clonamos para que no se afecten accidentalmente los datos originales
+      this.sabores = data.map(s => ({ ...s }));
     });
   }
 
@@ -47,6 +48,19 @@ export class GestionSaboresComponent implements OnInit {
       this.cargarSabores();
     });
   }
+
+  actualizarSabor(sabor: any): void {
+    const actualizado = {
+      nombre: sabor.nombre,
+      precio: +sabor.precio // Aseguramos que sea número
+    };
+
+    this.saboresService.actualizarSabor(sabor.id, actualizado).subscribe(() => {
+      alert('Sabor actualizado correctamente.');
+      this.cargarSabores();
+    });
+  }
 }
+
 // Este componente se encarga de gestionar los sabores disponibles en la heladería,
 // permitiendo al usuario agregar nuevos sabores y eliminarlos. Utiliza el servicio SaboresService

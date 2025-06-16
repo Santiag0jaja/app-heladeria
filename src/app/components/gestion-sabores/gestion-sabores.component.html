@@ -9,8 +9,14 @@
 
   <ul class="sabor-lista">
     <li *ngFor="let sabor of sabores">
-      {{ sabor.nombre }} - ${{ sabor.precio }}
+      <input [(ngModel)]="sabor.nombre" />
+      <input [(ngModel)]="sabor.precio" type="number" />
+      <button (click)="actualizarSabor(sabor)">Guardar</button>
       <button (click)="eliminarSabor(sabor.id)">Eliminar</button>
     </li>
   </ul>
 </div>
+<!-- 
+  Este componente permite a los administradores gestionar los sabores de helado.
+  Permite agregar nuevos sabores, actualizar sus nombres y precios, y eliminar sabores existentes.
+  Los cambios se reflejan en tiempo real en la lista de sabores disponibles. -->
