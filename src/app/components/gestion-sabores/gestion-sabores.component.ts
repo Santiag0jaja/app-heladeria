@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SaboresService } from '../../services/sabores.service';
 
-
 @Component({
   selector: 'app-gestion-sabores',
   standalone: true,
@@ -13,7 +12,10 @@ import { SaboresService } from '../../services/sabores.service';
 })
 export class GestionSaboresComponent implements OnInit {
   sabores: any[] = [];
-  nuevoSabor: string = '';
+  nuevoSabor = {
+    nombre: '',
+    precio: 0
+  };
 
   constructor(private saboresService: SaboresService) {}
 
@@ -28,11 +30,13 @@ export class GestionSaboresComponent implements OnInit {
   }
 
   agregarSabor(): void {
-    const nombre = this.nuevoSabor.trim();
-    if (nombre) {
-      const nuevo = { nombre };
+    const nombre = this.nuevoSabor.nombre.trim();
+    const precio = this.nuevoSabor.precio;
+
+    if (nombre && precio > 0) {
+      const nuevo = { nombre, precio };
       this.saboresService.crearSabor(nuevo).subscribe(() => {
-        this.nuevoSabor = '';
+        this.nuevoSabor = { nombre: '', precio: 0 };
         this.cargarSabores();
       });
     }
@@ -44,3 +48,5 @@ export class GestionSaboresComponent implements OnInit {
     });
   }
 }
+// Este componente se encarga de gestionar los sabores disponibles en la heladería,
+// permitiendo al usuario agregar nuevos sabores y eliminarlos. Utiliza el servicio SaboresService
