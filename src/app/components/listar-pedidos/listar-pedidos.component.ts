@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+// src/app/components/listar-pedidos/listar-pedidos.component.ts
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PedidoService } from '../../services/pedido.service';
 
@@ -9,22 +10,30 @@ import { PedidoService } from '../../services/pedido.service';
   templateUrl: './listar-pedidos.component.html',
   styleUrls: ['./listar-pedidos.component.css']
 })
-export class ListarPedidosComponent {
-  constructor(public pedidoService: PedidoService) {}
+export class ListarPedidosComponent implements OnInit {
+  pedidos: any[] = [];
 
-  eliminarPedido(index: number): void {
-    this.pedidoService.eliminarPedido(index);
+  constructor(private pedidoService: PedidoService) {}
+
+  ngOnInit(): void {
+    this.cargarPedidos();
   }
 
-  getNombreTopping(id: number): string {
-    const toppings = [
-      { id: 1, nombre: 'Chispas de chocolate' },
-      { id: 2, nombre: 'Nueces' },
-      { id: 3, nombre: 'Frutas frescas' },
-      { id: 4, nombre: 'Caramelo' }
-    ];
-    return toppings.find(t => t.id === id)?.nombre || '';
+  cargarPedidos(): void {
+    this.pedidoService.getPedidos().subscribe((data) => {
+      this.pedidos = data;
+    });
+  }
+
+  eliminarPedido(id: number): void {
+    if (confirm('¿Estás seguro de eliminar este pedido?')) {
+      this.pedidoService.eliminarPedido(id).subscribe(() => {
+        this.cargarPedidos(); // Actualizar la lista después de borrar
+      });
+    }
   }
 }
-// Este componente lista los pedidos realizados, mostrando el sabor, toppings, cantidad y notas de cada pedido.
-// Permite eliminar un pedido específico utilizando el servicio PedidoService.
+// Este componente se encarga de listar los pedidos realizados,
+//  permitiendo al usuario ver todos los pedidos y eliminarlos si 
+// es necesario. Utiliza el servicio PedidoService para obtener y 
+// eliminar pedidos de la API. La lista se actualiza automáticamente después de eliminar un pedido.

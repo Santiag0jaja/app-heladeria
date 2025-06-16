@@ -1,43 +1,30 @@
 {
-  "pedidos": [
-    {
-      "id": 1,
-      "cliente": "Carlos Gómez",
-      "toppings": ["chocolate", "fresa"],
-      "total": 9000
-    },
-    {
-      "id": 2,
-      "cliente": "María Ruiz",
-      "toppings": ["vainilla", "arequipe"],
-      "total": 8000
-    }
-  ],
+  "pedidos": [],
   "sabores": [
     {
-      "id": 1,
+      "id": "1",
       "nombre": "Chocolate",
       "precio": 5000
     },
     {
-      "id": 2,
+      "id": "2",
       "nombre": "Fresa",
       "precio": 4000
     },
     {
-      "id": 3,
+      "id": "3",
       "nombre": "Vainilla",
       "precio": 4500
     }
   ],
   "clientes": [
     {
-      "id": 1,
+      "id": "1",
       "nombre": "Carlos Gómez",
       "email": "carlos@example.com"
     },
     {
-      "id": 2,
+      "id": "2",
       "nombre": "María Ruiz",
       "email": "maria@example.com"
     }

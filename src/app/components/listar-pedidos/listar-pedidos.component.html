@@ -1,19 +1,15 @@
-<div class="listar-container">
-  <h2>Pedidos Realizados</h2>
-  <div *ngIf="pedidoService.obtenerPedidos().length === 0">
-    No hay pedidos aún.
-  </div>
+<div class="pedidos-container">
+  <h2>Lista de Pedidos</h2>
 
-  <div *ngFor="let pedido of pedidoService.obtenerPedidos(); let i = index" class="pedido-card">
-    <h3>{{ pedido.sabor.nombre }}</h3>
-    <p><strong>Cantidad:</strong> {{ pedido.cantidad }}</p>
-    <p><strong>Notas:</strong> {{ pedido.notas || 'Ninguna' }}</p>
-    <p><strong>Toppings:</strong></p>
-    <ul>
-      <li *ngFor="let id of pedido.toppings">{{ getNombreTopping(id) }}</li>
-    </ul>
-    <button (click)="eliminarPedido(i)">Eliminar</button>
+  <div *ngIf="pedidos.length === 0">No hay pedidos disponibles.</div>
+
+  <div *ngFor="let pedido of pedidos" class="pedido-card">
+    <p><strong>Cliente:</strong> {{ pedido.cliente }}</p>
+    <p><strong>Toppings:</strong> {{ pedido.toppings.join(', ') }}</p>
+    <p><strong>Total:</strong> ${{ pedido.total | number:'1.0-0' }}</p>
+    <button (click)="eliminarPedido(pedido.id)">Eliminar</button>
   </div>
 </div>
-<!-- Este componente lista los pedidos realizados, mostrando el sabor, toppings, cantidad y notas de cada pedido.
-Permite eliminar un pedido específico utilizando el servicio PedidoService. -->
+<!-- Este componente permite a los usuarios ver una lista de pedidos realizados.
+     Cada pedido muestra el nombre del cliente, los toppings seleccionados y el total del pedido.
+     También incluye un botón para eliminar cada pedido de la lista. -->

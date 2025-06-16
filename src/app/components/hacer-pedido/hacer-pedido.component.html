@@ -2,6 +2,11 @@
   <h2>Hacer un Pedido</h2>
   <form [formGroup]="pedidoForm" (ngSubmit)="onSubmit()">
     <div>
+      <label>Nombre del Cliente:</label>
+      <input type="text" formControlName="cliente" required>
+    </div>
+
+    <div>
       <label>Sabor:</label>
       <select formControlName="sabor">
         <option [ngValue]="null">Selecciona un sabor</option>
@@ -16,11 +21,10 @@
       <div *ngFor="let topping of toppings">
         <input 
           type="checkbox"
-          [id]="'topping' + topping.id"
-          [value]="topping.id"
-          (change)="onToppingChange($event, topping.id)"
+          [id]="topping.nombre"
+          (change)="onToppingChange($event, topping.nombre)"
         >
-        <label [for]="'topping' + topping.id">{{ topping.nombre }} - ${{ topping.precio }}</label>
+        <label [for]="topping.nombre">{{ topping.nombre }} - ${{ topping.precio }}</label>
       </div>
     </div>
 
@@ -41,5 +45,6 @@
     <button type="submit" [disabled]="pedidoForm.invalid">Confirmar Pedido</button>
   </form>
 </div>
-<!-- Este componente permite a los usuarios hacer pedidos de helados, seleccionando un sabor, toppings, cantidad y notas.
-Utiliza un formulario reactivo para manejar la entrada del usuario y el servicio PedidoService para almacenar los pedidos. -->
+<!-- This component allows users to place ice cream orders.
+     It uses a reactive form to capture order details, including the customer, flavor, toppings, quantity, and notes.
+     The total price is calculated based on the selected flavor and toppings. -->

@@ -14,23 +14,21 @@ export class HacerPedidoComponent {
   pedidoForm: FormGroup;
 
   sabores = [
-    { id: 1, nombre: 'Chocolate', precio: 5000 },
-    { id: 2, nombre: 'Vainilla', precio: 4500 },
-    { id: 3, nombre: 'Fresa', precio: 4800 },
-    { id: 4, nombre: 'Menta', precio: 4700 },
-    { id: 5, nombre: 'Limón', precio: 4300 },
-    { id: 6, nombre: 'Café', precio: 5200 }
+    { nombre: 'Chocolate', precio: 5000 },
+    { nombre: 'Vainilla', precio: 4500 },
+    { nombre: 'Fresa', precio: 4800 }
   ];
 
   toppings = [
-    { id: 1, nombre: 'Chispas de chocolate', precio: 1000 },
-    { id: 2, nombre: 'Nueces', precio: 1500 },
-    { id: 3, nombre: 'Frutas frescas', precio: 1800 },
-    { id: 4, nombre: 'Caramelo', precio: 1200 }
+    { nombre: 'Chispas de chocolate', precio: 1000 },
+    { nombre: 'Nueces', precio: 1500 },
+    { nombre: 'Frutas frescas', precio: 1800 },
+    { nombre: 'Caramelo', precio: 1200 }
   ];
 
   constructor(private fb: FormBuilder, private pedidoService: PedidoService) {
     this.pedidoForm = this.fb.group({
+      cliente: ['', Validators.required],
       sabor: [null, Validators.required],
       toppings: [[]],
       cantidad: [1, [Validators.required, Validators.min(1)]],
@@ -38,13 +36,13 @@ export class HacerPedidoComponent {
     });
   }
 
-  onToppingChange(event: Event, toppingId: number): void {
+  onToppingChange(event: Event, toppingNombre: string): void {
     const checkbox = event.target as HTMLInputElement;
     const selected = this.pedidoForm.get('toppings')?.value || [];
-    if (checkbox.checked && !selected.includes(toppingId)) {
-      selected.push(toppingId);
+    if (checkbox.checked && !selected.includes(toppingNombre)) {
+      selected.push(toppingNombre);
     } else if (!checkbox.checked) {
-      const idx = selected.indexOf(toppingId);
+      const idx = selected.indexOf(toppingNombre);
       if (idx > -1) selected.splice(idx, 1);
     }
     this.pedidoForm.get('toppings')?.setValue(selected);
@@ -53,8 +51,8 @@ export class HacerPedidoComponent {
   calcularTotal(): number {
     const { sabor, toppings, cantidad } = this.pedidoForm.value;
     const saborPrecio = sabor?.precio || 0;
-    const toppingsPrecio = toppings.reduce((acc: number, id: number) => {
-      const topping = this.toppings.find(t => t.id === id);
+    const toppingsPrecio = toppings.reduce((acc: number, nombre: string) => {
+      const topping = this.toppings.find(t => t.nombre === nombre);
       return acc + (topping?.precio || 0);
     }, 0);
     return (saborPrecio + toppingsPrecio) * cantidad;
@@ -62,11 +60,26 @@ export class HacerPedidoComponent {
 
   onSubmit(): void {
     if (this.pedidoForm.valid) {
-      this.pedidoService.agregarPedido(this.pedidoForm.value);
-      alert('¡Pedido realizado con éxito!');
-      this.pedidoForm.reset({ cantidad: 1, toppings: [], sabor: null, notas: '' });
+      const form = this.pedidoForm.value;
+      const nuevoPedido = {
+        cliente: form.cliente,
+        sabor: form.sabor.nombre,
+        toppings: form.toppings,
+        total: this.calcularTotal()
+      };
+
+      this.pedidoService.agregarPedido(nuevoPedido).subscribe({
+        next: res => {
+          alert('¡Pedido realizado con éxito!');
+          this.pedidoForm.reset({ cantidad: 1, toppings: [], sabor: null, notas: '', cliente: '' });
+        },
+        error: err => {
+          alert('Error al guardar el pedido.');
+          console.error(err);
+        }
+      });
     }
   }
 }
-// Este componente permite a los usuarios hacer pedidos de helados, seleccionando un sabor, toppings, cantidad y notas.
-// Utiliza un formulario reactivo para manejar la entrada del usuario y el servicio PedidoService para almacenar los pedidos.
+// Este componente permite a los usuarios hacer pedidos de helados.
+// Utiliza un formulario reactivo para capturar los datos del pedido, incluyendo el cliente,

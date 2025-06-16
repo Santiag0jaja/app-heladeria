@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { SaboresService } from '../../services/sabores.service';
+
 
 @Component({
   selector: 'app-gestion-sabores',
@@ -10,37 +12,35 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./gestion-sabores.component.css']
 })
 export class GestionSaboresComponent implements OnInit {
-  sabores: string[] = [];
+  sabores: any[] = [];
   nuevoSabor: string = '';
 
+  constructor(private saboresService: SaboresService) {}
+
   ngOnInit(): void {
-    const datosGuardados = localStorage.getItem('sabores');
-    if (datosGuardados) {
-      this.sabores = JSON.parse(datosGuardados);
-    } else {
-      this.sabores = ['Chocolate', 'Fresa', 'Vainilla']; // valores por defecto
-      this.guardarEnLocalStorage();
+    this.cargarSabores();
+  }
+
+  cargarSabores(): void {
+    this.saboresService.getSabores().subscribe((data) => {
+      this.sabores = data;
+    });
+  }
+
+  agregarSabor(): void {
+    const nombre = this.nuevoSabor.trim();
+    if (nombre) {
+      const nuevo = { nombre };
+      this.saboresService.crearSabor(nuevo).subscribe(() => {
+        this.nuevoSabor = '';
+        this.cargarSabores();
+      });
     }
   }
 
-  agregarSabor() {
-    const sabor = this.nuevoSabor.trim();
-    if (sabor && !this.sabores.includes(sabor)) {
-      this.sabores.push(sabor);
-      this.nuevoSabor = '';
-      this.guardarEnLocalStorage();
-    }
-  }
-
-  eliminarSabor(index: number) {
-    this.sabores.splice(index, 1);
-    this.guardarEnLocalStorage();
-  }
-
-  guardarEnLocalStorage() {
-    localStorage.setItem('sabores', JSON.stringify(this.sabores));
+  eliminarSabor(id: number): void {
+    this.saboresService.eliminarSabor(id).subscribe(() => {
+      this.cargarSabores();
+    });
   }
 }
-
-// Este componente permite gestionar una lista de sabores de helado.
-// Incluye funcionalidades para agregar nuevos sabores y eliminar sabores existentes.

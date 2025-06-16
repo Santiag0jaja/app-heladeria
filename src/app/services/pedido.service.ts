@@ -1,29 +1,23 @@
+// src/app/services/pedido.service.ts
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
-interface Pedido {
-  sabor: any;
-  toppings: number[];
-  cantidad: number;
-  notas: string;
-}
-
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class PedidoService {
-  private pedidos: Pedido[] = [];
+  private apiUrl = 'http://localhost:3000/pedidos';
 
-  agregarPedido(pedido: Pedido) {
-    this.pedidos.push(pedido);
+  constructor(private http: HttpClient) {}
+
+  getPedidos(): Observable<any[]> {
+    return this.http.get<any[]>(this.apiUrl);
   }
 
-  obtenerPedidos(): Pedido[] {
-    return this.pedidos;
+  agregarPedido(pedido: any): Observable<any> {
+    return this.http.post<any>(this.apiUrl, pedido);
   }
 
-  eliminarPedido(index: number) {
-    this.pedidos.splice(index, 1);
+  eliminarPedido(id: number): Observable<any> {
+    return this.http.delete<any>(`${this.apiUrl}/${id}`);
   }
 }
-// Este servicio maneja los pedidos de helados, permitiendo agregar, obtener y eliminar pedidos.
-// Se utiliza para almacenar los pedidos en memoria durante la sesión de la aplicación.
