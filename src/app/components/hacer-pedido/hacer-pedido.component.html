@@ -1,20 +1,30 @@
 <div class="pedido-container">
   <h2>Hacer un Pedido</h2>
-  <form [formGroup]="pedidoForm" (ngSubmit)="onSubmit()">
 
+  <div *ngIf="pedidoForm.invalid && pedidoForm.touched" class="error">
+    ⚠️ Por favor, completa todos los campos requeridos.
+  </div>
+
+  <form [formGroup]="pedidoForm" (ngSubmit)="onSubmit()">
     <div>
-      <label>Nombre del cliente:</label>
-      <input type="text" formControlName="cliente" />
+      <label for="cliente">Nombre del Cliente:</label>
+      <input id="cliente" type="text" formControlName="cliente" />
+      <div class="error" *ngIf="pedidoForm.get('cliente')?.touched && pedidoForm.get('cliente')?.invalid">
+        El nombre del cliente es obligatorio.
+      </div>
     </div>
 
     <div>
-      <label>Sabor:</label>
-      <select formControlName="sabor">
+      <label for="sabor">Sabor:</label>
+      <select id="sabor" formControlName="sabor">
         <option [ngValue]="null">Selecciona un sabor</option>
         <option *ngFor="let sabor of sabores" [ngValue]="sabor">
           {{ sabor.nombre }} - ${{ sabor.precio }}
         </option>
       </select>
+      <div class="error" *ngIf="pedidoForm.get('sabor')?.touched && pedidoForm.get('sabor')?.invalid">
+        Debes seleccionar un sabor.
+      </div>
     </div>
 
     <div>
@@ -25,22 +35,27 @@
           [id]="'topping' + topping.id"
           [value]="topping.id"
           (change)="onToppingChange($event, topping.id)"
-        >
-        <label [for]="'topping' + topping.id">{{ topping.nombre }} - ${{ topping.precio }}</label>
+        />
+        <label [for]="'topping' + topping.id">
+          {{ topping.nombre }} - ${{ topping.precio }}
+        </label>
       </div>
     </div>
 
     <div>
-      <label>Cantidad:</label>
-      <input type="number" formControlName="cantidad" min="1">
+      <label for="cantidad">Cantidad:</label>
+      <input id="cantidad" type="number" formControlName="cantidad" min="1" />
+      <div class="error" *ngIf="pedidoForm.get('cantidad')?.touched && pedidoForm.get('cantidad')?.invalid">
+        La cantidad debe ser al menos 1.
+      </div>
     </div>
 
     <div>
-      <label>Notas:</label>
-      <textarea formControlName="notas"></textarea>
+      <label for="notas">Notas:</label>
+      <textarea id="notas" formControlName="notas"></textarea>
     </div>
 
-    <div>
+    <div class="total">
       <strong>Total:</strong> ${{ calcularTotal() | number:'1.0-0' }}
     </div>
 
