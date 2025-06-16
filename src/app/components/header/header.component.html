@@ -2,6 +2,7 @@
   <div class="logo">
     <h1>Heladería Delicia</h1>
   </div>
+
   <nav class="nav">
     <a [class.active]="isActive('/inicio')" routerLink="/inicio">Inicio</a>
     <a [class.active]="isActive('/hacer-pedido')" routerLink="/hacer-pedido">Hacer Pedido</a>
@@ -9,7 +10,11 @@
     <a [class.active]="isActive('/gestion-sabores')" routerLink="/gestion-sabores" *ngIf="isAdmin">Gestionar Sabores</a>
     <a [class.active]="isActive('/clientes')" routerLink="/clientes" *ngIf="isAdmin">Clientes</a>
   </nav>
+
   <div class="user-section">
     <button class="logout-btn" (click)="logout()">Cerrar Sesión</button>
   </div>
 </header>
+<!-- Este componente representa el encabezado de la aplicación, incluyendo el logo, navegación y botón de cierre de sesión.
+ --><!-- Utiliza la directiva `routerLink` para navegar entre las diferentes secciones de la aplicación. -->
+<!-- El botón de cierre de sesión llama al método `logout` del servicio `AuthService` para cerrar la sesión del usuario. -->

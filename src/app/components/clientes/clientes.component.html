@@ -1,1 +1,18 @@
-<p>clientes works!</p>
+<div class="clientes-container">
+  <h2>Lista de Clientes</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cliente of clientes">
+        <td>{{ cliente.nombre }}</td>
+        <td>{{ cliente.email }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

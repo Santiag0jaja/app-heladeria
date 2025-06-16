@@ -1,1 +1,18 @@
-<p>gestion-sabores works!</p>
+<div class="gestion-container">
+  <h2>Gestión de Sabores</h2>
+
+  <div class="form-group">
+    <input [(ngModel)]="nuevoSabor" placeholder="Nuevo sabor..." />
+    <button (click)="agregarSabor()">Agregar</button>
+  </div>
+
+  <ul class="sabor-lista">
+    <li *ngFor="let sabor of sabores; let i = index">
+      {{ sabor }}
+      <button (click)="eliminarSabor(i)">Eliminar</button>
+    </li>
+  </ul>
+</div>
+<!-- Este componente permite a los administradores agregar y eliminar sabores de helado.
+ --><!-- Utiliza `ngModel` para enlazar el campo de entrada con la propiedad `nuevoSabor`.
+ --><!-- La lista de sabores se muestra utilizando `*ngFor`, y cada sabor tiene un botón para eliminarlo. -->
