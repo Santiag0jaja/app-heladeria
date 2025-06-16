@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
 import { PedidoService } from '../../services/pedido.service';
 
 @Component({
@@ -41,46 +40,33 @@ export class HacerPedidoComponent {
 
   onToppingChange(event: Event, toppingId: number): void {
     const checkbox = event.target as HTMLInputElement;
-    const selectedToppings: number[] = this.pedidoForm.get('toppings')?.value || [];
-
-    if (checkbox.checked && !selectedToppings.includes(toppingId)) {
-      selectedToppings.push(toppingId);
+    const selected = this.pedidoForm.get('toppings')?.value || [];
+    if (checkbox.checked && !selected.includes(toppingId)) {
+      selected.push(toppingId);
     } else if (!checkbox.checked) {
-      const index = selectedToppings.indexOf(toppingId);
-      if (index > -1) selectedToppings.splice(index, 1);
+      const idx = selected.indexOf(toppingId);
+      if (idx > -1) selected.splice(idx, 1);
     }
-
-    this.pedidoForm.get('toppings')?.setValue(selectedToppings);
+    this.pedidoForm.get('toppings')?.setValue(selected);
   }
 
   calcularTotal(): number {
-    const form = this.pedidoForm.value;
-    const saborPrecio = form.sabor?.precio || 0;
-
-    const toppingsPrecio = form.toppings.reduce((total: number, toppingId: number) => {
-      const topping = this.toppings.find(t => t.id === toppingId);
-      return total + (topping?.precio || 0);
+    const { sabor, toppings, cantidad } = this.pedidoForm.value;
+    const saborPrecio = sabor?.precio || 0;
+    const toppingsPrecio = toppings.reduce((acc: number, id: number) => {
+      const topping = this.toppings.find(t => t.id === id);
+      return acc + (topping?.precio || 0);
     }, 0);
-
-    return (saborPrecio + toppingsPrecio) * form.cantidad;
+    return (saborPrecio + toppingsPrecio) * cantidad;
   }
 
   onSubmit(): void {
     if (this.pedidoForm.valid) {
-      const pedido = {
-        ...this.pedidoForm.value,
-        total: this.calcularTotal(),
-        fecha: new Date().toISOString()
-      };
-      this.pedidoService.guardarPedido(pedido); // guardar en localStorage
-      console.log('Pedido enviado:', pedido);
+      this.pedidoService.agregarPedido(this.pedidoForm.value);
       alert('¡Pedido realizado con éxito!');
-      this.pedidoForm.reset({
-        cantidad: 1,
-        toppings: [],
-        sabor: null,
-        notas: ''
-      });
+      this.pedidoForm.reset({ cantidad: 1, toppings: [], sabor: null, notas: '' });
     }
   }
 }
+// Este componente permite a los usuarios hacer pedidos de helados, seleccionando un sabor, toppings, cantidad y notas.
+// Utiliza un formulario reactivo para manejar la entrada del usuario y el servicio PedidoService para almacenar los pedidos.

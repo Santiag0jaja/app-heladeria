@@ -1,21 +1,19 @@
-<div class="pedidos-container">
-  <h2>Mis Pedidos</h2>
-  <div *ngIf="pedidos.length === 0">No tienes pedidos registrados.</div>
+<div class="listar-container">
+  <h2>Pedidos Realizados</h2>
+  <div *ngIf="pedidoService.obtenerPedidos().length === 0">
+    No hay pedidos aún.
+  </div>
 
-  <div *ngFor="let pedido of pedidos" class="pedido-card">
-    <p><strong>Sabor:</strong> {{ pedido.sabor?.nombre }}</p>
-    <p><strong>Toppings:</strong> 
-      <span *ngIf="pedido.toppings?.length > 0; else noToppings">
-        {{ pedido.toppings.join(', ') }}
-      </span>
-      <ng-template #noToppings>Sin toppings</ng-template>
-    </p>
+  <div *ngFor="let pedido of pedidoService.obtenerPedidos(); let i = index" class="pedido-card">
+    <h3>{{ pedido.sabor.nombre }}</h3>
     <p><strong>Cantidad:</strong> {{ pedido.cantidad }}</p>
     <p><strong>Notas:</strong> {{ pedido.notas || 'Ninguna' }}</p>
-    <p><strong>Total:</strong> ${{ pedido.total | number:'1.0-0' }}</p>
-    <p><strong>Fecha:</strong> {{ pedido.fecha | date:'short' }}</p>
+    <p><strong>Toppings:</strong></p>
+    <ul>
+      <li *ngFor="let id of pedido.toppings">{{ getNombreTopping(id) }}</li>
+    </ul>
+    <button (click)="eliminarPedido(i)">Eliminar</button>
   </div>
 </div>
-<div class="no-pedidos" *ngIf="pedidos.length === 0">
-  <p>No tienes pedidos registrados.</p>
-</div>
+<!-- Este componente lista los pedidos realizados, mostrando el sabor, toppings, cantidad y notas de cada pedido.
+Permite eliminar un pedido específico utilizando el servicio PedidoService. -->

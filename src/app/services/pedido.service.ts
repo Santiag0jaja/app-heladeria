@@ -1,23 +1,29 @@
 import { Injectable } from '@angular/core';
 
-@Injectable({ providedIn: 'root' })
+interface Pedido {
+  sabor: any;
+  toppings: number[];
+  cantidad: number;
+  notas: string;
+}
+
+@Injectable({
+  providedIn: 'root'
+})
 export class PedidoService {
-  private STORAGE_KEY = 'pedidos';
+  private pedidos: Pedido[] = [];
 
-  obtenerPedidos(): any[] {
-    const pedidosJSON = localStorage.getItem(this.STORAGE_KEY);
-    return pedidosJSON ? JSON.parse(pedidosJSON) : [];
+  agregarPedido(pedido: Pedido) {
+    this.pedidos.push(pedido);
   }
 
-  guardarPedido(pedido: any): void {
-    const pedidos = this.obtenerPedidos();
-    pedidos.push(pedido);
-    localStorage.setItem(this.STORAGE_KEY, JSON.stringify(pedidos));
+  obtenerPedidos(): Pedido[] {
+    return this.pedidos;
   }
 
-  limpiarPedidos(): void {
-    localStorage.removeItem(this.STORAGE_KEY);
+  eliminarPedido(index: number) {
+    this.pedidos.splice(index, 1);
   }
 }
-// Este servicio maneja el almacenamiento de pedidos en el almacenamiento local del navegador.
-// Permite obtener, guardar y limpiar pedidos, facilitando la persistencia de datos entre sesiones.
+// Este servicio maneja los pedidos de helados, permitiendo agregar, obtener y eliminar pedidos.
+// Se utiliza para almacenar los pedidos en memoria durante la sesión de la aplicación.

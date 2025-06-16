@@ -1,116 +1,58 @@
-/* listar-pedidos.component.css */
-.pedidos-container {
-  max-width: 1000px;
-  margin: 2rem auto;
+.listar-container {
+  max-width: 800px;
+  margin: auto;
   padding: 2rem;
 }
 
-.pedidos-container h2 {
+.listar-container h2 {
   text-align: center;
-  color: #ff6b6b;
   margin-bottom: 2rem;
-}
-
-.no-pedidos {
-  text-align: center;
-  padding: 2rem;
-  background-color: #f9f9f9;
-  border-radius: 10px;
-}
-
-.no-pedidos p {
-  font-size: 1.2rem;
-  margin-bottom: 1.5rem;
-  color: #555;
-}
-
-.hacer-pedido-btn {
-  background-color: #ff6b6b;
-  color: white;
-  border: none;
-  padding: 0.8rem 1.5rem;
-  font-size: 1rem;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.hacer-pedido-btn:hover {
-  background-color: #ff4757;
-}
-
-.pedidos-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1.5rem;
+  color: #004f84;
 }
 
 .pedido-card {
-  background-color: white;
+  background-color: #ffffff;
+  border-left: 6px solid #007bba;
   border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   padding: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  transition: transform 0.3s, box-shadow 0.3s;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
 }
 
-.pedido-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+.pedido-card h3 {
+  margin-top: 0;
+  color: #222;
 }
 
-.pedido-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid #eee;
-  padding-bottom: 0.5rem;
-}
-
-.pedido-header h3 {
-  margin: 0;
-  color: #333;
-}
-
-.fecha {
-  color: #777;
-  font-size: 0.9rem;
-}
-
-.pedido-details {
-  flex-grow: 1;
-}
-
-.pedido-details p {
+.pedido-card p {
   margin: 0.5rem 0;
-  color: #555;
 }
 
-.pedido-footer {
-  display: flex;
-  justify-content: flex-end;
+ul {
+  padding-left: 1.2rem;
+  margin: 0.5rem 0;
 }
 
-.estado {
-  padding: 0.3rem 0.8rem;
-  border-radius: 20px;
-  font-size: 0.9rem;
-  font-weight: 500;
+li {
+  list-style-type: disc;
 }
 
-.estado-pendiente {
-  background-color: #ffeaa7;
-  color: #e17055;
+button {
+  background-color: #dc3545;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  margin-top: 1rem;
+  transition: background-color 0.2s ease;
 }
 
-.estado-en-proceso {
-  background-color: #a5d8ff;
-  color: #1971c2;
+button:hover {
+  background-color: #b02a37;
 }
-
-.estado-completado {
-  background-color: #b2f2bb;
-  color: #2b8a3e;
-}
+/* 
+ * Este componente lista los pedidos realizados, mostrando el sabor, toppings, cantidad y notas de cada pedido.
+ * Permite eliminar un pedido específico utilizando el servicio PedidoService.
+ */
