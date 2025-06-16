@@ -16,17 +16,19 @@ export class HeaderComponent {
 
   constructor(private router: Router, private authService: AuthService) {
     // Aquí puedes validar si es admin según tu lógica
-    this.isAdmin = this.authService.isLoggedIn(); // Solo ejemplo
+    this.isAdmin = this.authService.isLoggedIn(); 
   }
 
   isActive(route: string): boolean {
     return this.router.url === route;
   }
 
-  logout(): void {
-    this.authService.logout();
-  }
+ logout(): void {
+  this.authService.logout();
+  this.router.navigate(['/login']).then(() => {
+    location.reload(); 
+  });
 }
-
 // Este componente de encabezado incluye enlaces de navegación y un botón de cierre de sesión.
 // Utiliza el servicio de autenticación para manejar el cierre de sesión y verificar si el usuario es administrador.
+}
