@@ -21,7 +21,7 @@ export class LoginComponent {
     if (this.username === 'admin' && this.password === 'admin123') {
       localStorage.setItem('isLoggedIn', 'true');
       this.router.navigate(['/inicio']).then(() => {
-        location.reload(); // 🔁 Fuerza el refresh después de navegar a /inicio
+        location.reload(); 
       });
     } else {
       this.error = 'Credenciales incorrectas';

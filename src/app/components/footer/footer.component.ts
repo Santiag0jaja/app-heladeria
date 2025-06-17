@@ -10,3 +10,4 @@ import { Component } from '@angular/core';
 export class FooterComponent {
   currentYear: number = new Date().getFullYear();
 }
+// Este componente muestra el pie de página de la aplicación con el año actual.

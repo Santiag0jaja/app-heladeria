@@ -35,3 +35,6 @@ export const routes: Routes = [
 }
 
 ];
+
+// Este archivo define las rutas de la aplicación Angular.
+// Utiliza lazy loading para cargar componentes específicos bajo demanda, mejorando el rendimiento.

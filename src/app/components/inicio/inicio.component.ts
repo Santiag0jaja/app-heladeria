@@ -18,4 +18,4 @@ export class InicioComponent {
   ];
 }
 // Este componente muestra la página de inicio de la aplicación, destacando algunos sabores de helado.
-// Utiliza imágenes locales para representar los sabores y permite navegar a otras secciones de la aplicación.
+// Utiliza imágenes para representar los sabores y permite navegar a otras secciones de la aplicación.

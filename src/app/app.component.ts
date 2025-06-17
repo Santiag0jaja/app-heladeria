@@ -20,7 +20,7 @@ import { FooterComponent } from './components/footer/footer.component';
       padding: 2rem;
       max-width: 1200px;
       margin: 0 auto;
-      min-height: calc(100vh - 160px); /* Ajusta según la altura del header y footer */
+      min-height: calc(100vh - 160px); 
     }
   `]
 })

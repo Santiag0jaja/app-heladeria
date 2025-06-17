@@ -25,7 +25,6 @@ export class GestionSaboresComponent implements OnInit {
 
   cargarSabores(): void {
     this.saboresService.getSabores().subscribe((data) => {
-      // Clonamos para que no se afecten accidentalmente los datos originales
       this.sabores = data.map(s => ({ ...s }));
     });
   }
@@ -52,7 +51,7 @@ export class GestionSaboresComponent implements OnInit {
   actualizarSabor(sabor: any): void {
     const actualizado = {
       nombre: sabor.nombre,
-      precio: +sabor.precio // Aseguramos que sea número
+      precio: +sabor.precio 
     };
 
     this.saboresService.actualizarSabor(sabor.id, actualizado).subscribe(() => {

@@ -16,4 +16,4 @@ export class ClientesComponent {
   ];
 }
 // Este componente muestra una lista de clientes con sus nombres y correos electrónicos.
-// Puedes agregar funcionalidades adicionales como editar o eliminar clientes según sea necesario.
+// Puedes agregar, editar o eliminar clientes según sea necesario (desde aqui)
