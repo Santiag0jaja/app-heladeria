@@ -48,25 +48,18 @@ La aplicación demuestra la integración de las funcionalidades clave de Angular
 
 ## Estructura del Proyecto
 
-- `/src/app/components/`  
-  Componentes reutilizables y específicos para gestión de pedidos, clientes, sabores y listado/modificación.
-
-- `/src/app/services/`  
-  Servicios que encapsulan la lógica de comunicación con la API (HttpClient).
-
-- `/src/app/guards/`  
-  Guards para protección de rutas.
-
-- `/src/app/app-routing.module.ts`  
-  Definición de rutas y asignación de guards.
+<div align="center">
+  <img src="src/assets/organigrama.png" width="600" style="border-radius: 12px; border: 1px solid #e0f7e0;"/>
+</div>
 
 ---
 
-## Configuración y Ejecución
+## Configuración y Ejecución!!!
 
 1. **Clonar el repositorio:**  
    ```bash
-   git clone <url-del-repositorio>
+   git clone https://github.com/Santiag0jaja/app-heladeria.git
+   
    cd app-heladeria
 
 2. **Instalar dependencias:**
