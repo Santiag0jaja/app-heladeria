@@ -8,7 +8,7 @@ La aplicación demuestra la integración de las funcionalidades clave de Angular
 
 ---
 <div align="center">
-  <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExMjVqYnA1ZWZ1bXJiNDR6d2kzaW9ienpuMzE2MHB0dGVycHl4NjM1OSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/pUVOeIagS1rrqsYQJe/giphy.gif" width="600" style="border-radius: 12px; border: 1px solid #e0f7e0;"/>
+  <img src="src/assets/lol.png" width="600" style="border-radius: 12px; border: 1px solid #e0f7e0;"/>
 </div>
 
 ---
