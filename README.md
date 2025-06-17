@@ -74,17 +74,17 @@ La aplicación demuestra la integración de las funcionalidades clave de Angular
    ```bash
     npm install
 
-3. **Levantar API simulada (JSON Server):
-    (Asegúrate de tener instalado JSON Server)**
+3. **Levantar API simulada (JSON Server):**
 
    ```bash
+    npm install json-server
     json-server --watch db.json --port 3000
 
 4. **Ejecutar la aplicación Angular:**
 
    ```bash
     ng serve
-    Navegar a http://localhost:4200 para interactuar con la SPA.
+  Navegar a http://localhost:4200 para interactuar con la SPA.
 
 ---
 **Notas Importantes**
