@@ -80,7 +80,13 @@ La aplicación demuestra la integración de las funcionalidades clave de Angular
   Navegar a http://localhost:4200 para interactuar con la SPA.
 
 ---
+
+**¡INICIAR PRIMERO LA API SIMULADA ANTES DE EJECUTAR LA APP ANGULAR!**
+
+---
+
 **Notas Importantes**
+
 La API simulada está configurada en http://localhost:3000 y los servicios Angular consumen esta dirección para realizar las operaciones CRUD.
 
 Se ha implementado manejo básico de errores y confirmaciones para acciones destructivas como eliminar pedidos o clientes.
